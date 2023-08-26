@@ -30,7 +30,7 @@ class ContractRequest extends FormRequest
             'title' => 'required|string|max:75',
             'content' => 'required|string',
             'user_id' => 'required|integer',
-            'pdf' => 'nullable',
+            'pdf' => 'required',
             'is_sign' => 'nullable|boolean',
         ];
     }

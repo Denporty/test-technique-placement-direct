@@ -36,6 +36,18 @@ return new class extends Migration
             'phone' => '0769178981',
             'administrator' => true,
         ]);
+
+
+
+        DB::table('users')->insert([
+            'username' => 'test',
+            'firstname' => 'test',
+            'lastname' => 'test',
+            'password' => Hash::make('Test2022'),
+            'email' => 'contact@test.fr',
+            'phone' => '0134211208',
+            'administrator' => false,
+        ]);
     }
 
     /**

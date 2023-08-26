@@ -4,14 +4,14 @@
 
 Le projet se compose de 2 features :
 
-- Création d'un compte via le starter kit Laravel Breeze dans sa version Inertia modifié pour ajouter un numéro de téléphone, 
+- Système d'authentification via le starter kit Laravel Breeze dans sa version Inertia modifié pour ajouter un numéro de téléphone, 
 un grade via un boolean, un prénom, nom et pseudo. 
 - Mise en place d'une feature pour gérer des contrats. La feature est découpée en 2 parties :
-  - Partie administrateur : peuvent créer un contrat qui se compose d'un titre, une description, un utilisateur lié au contrat et un fichier pdf
-  représentant le dis contrat. Les administrateurs peuvent voir l'intégralité des contrats ainsi que les modifier ou les supprimer. Les administrateurs ne
+  - Partie administrateur : peut créer un contrat qui se compose d'un titre, une description, un utilisateur lié au contrat et un fichier pdf
+  représentant le dit contrat. Les administrateurs peuvent voir l'intégralité des contrats ainsi que les modifier ou les supprimer. Les administrateurs ne
   peuvent pas signer des contrats à la place des utilisateurs.
   - Partie utilisateur : peuvent voir UNIQUEMENT les contrats qui leur sont attribués. Ils ont également la possibilité de visualiser le contrat
-  et de le signer.
+  et de le signer. Lorsqu'un contrat est signé l'utilisateur ne peut pas enlever la signature.
 
 ## Liste des technos 
 
@@ -37,7 +37,7 @@ Pour setup le projet vous pouvez utiliser directement le script setupScript.sh
 ```bash
 sh setupScript.sh
 ```
-Le script setupScript execute les commandes suivantes : 
+Le script setupScript exécute les commandes suivantes : 
 
 ```bash
 #!/bin/bash
@@ -74,7 +74,7 @@ npm install
 echo "Script pull finished"
 ```
 
-Si vous souhaitez initialiser vous même le projet voici les étapes à suivre : 
+Si vous souhaitez initialiser vous-même le projet voici les étapes à suivre : 
 
 Installation des librairies php
 ```
@@ -84,7 +84,7 @@ Génération de la clé d'application
 ```
 php artisan key:generate
 ```
-Migrations (j'ai décidé de simplifier la mise en place d'un compte admin en incorporant le compte directement à la migration mais un seeder est également présent dans database/seeders/UserSeeder.php)
+Migrations (j'ai décidé de simplifier la mise en place d'un compte admin et utilisateur classique en incorporant le compte directement à la migration mais un seeder est également présent dans database/seeders/UserSeeder.php)
 ```
 php artisan migrate:fresh
 ```

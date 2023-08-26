@@ -112,11 +112,14 @@ class ContractController extends Controller
 
     /**
      * @param ContractSignRequest $request
-     * @param Contract|null $contract
+     * @param Contract $contract
      * @return RedirectResponse
      */
-    public function sign(ContractSignRequest $request, Contract $contract = null): RedirectResponse
+    public function sign(ContractSignRequest $request, Contract $contract): RedirectResponse
     {
+        if ($contract->is_sign) {
+            return Redirect::route('contracts.index')->with('success', "Vous ne pouvez pas annuler la signature d'un contrat");
+        }
         Contract::saveContract($request->validated(), $contract);
         return Redirect::route('contracts.index')->with('success', 'Le contract a bien été signé');
     }

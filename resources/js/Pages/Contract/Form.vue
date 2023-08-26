@@ -27,7 +27,8 @@
             </div>
             <div class="my-2">
                 <label for="pdf">PDF du contrat</label>
-                <input type="file" id="pdf" name="pdf" :message="form.errors.pdf" @change="handleFileUpload">
+                <input type="file" id="pdf" name="pdf" @change="handleFileUpload">
+                <InputError :message="form.errors.pdf"></InputError>
             </div>
             <div class="my-2">
                 <label>Fichier PDF du contrat</label>
@@ -55,6 +56,7 @@ import TextArea from "@/components/TextArea.vue";
 import Modal from "@/components/Modal.vue";
 import {defineProps, ref} from "vue";
 import {useForm, Head} from "@inertiajs/vue3";
+import InputError from "@/components/InputError.vue";
 
 const props = defineProps({
     contract: Object,
