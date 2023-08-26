@@ -37,8 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('contracts', ContractController::class)->except(['show', 'update', 'index'])->middleware('admin');
     Route::get('contracts', [ContractController::class, 'index'])->name('contracts.index');
     Route::get('contracts/{contract}/show', [ContractController::class, 'show'])->name('contracts.show');
-    Route::post('contracts/{contract}/update', [ContractController::class, 'update'])->name('contracts.update');
-    Route::post('contracts/{contract}/sign', [ContractController::class, 'sign'])->name('contracts.sign');
+    Route::post('contracts/{contract}/update', [ContractController::class, 'update'])->name('contracts.update')->middleware('admin');
+    Route::post('contracts/{contract}/sign', [ContractController::class, 'sign'])->name('contracts.sign')->middleware('noadmin');
 });
 
 require __DIR__.'/auth.php';

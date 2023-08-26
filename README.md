@@ -8,7 +8,8 @@ Le projet se compose de 2 features :
 un grade via un boolean, un prénom, nom et pseudo. 
 - Mise en place d'une feature pour gérer des contrats. La feature est découpée en 2 parties :
   - Partie administrateur : peuvent créer un contrat qui se compose d'un titre, une description, un utilisateur lié au contrat et un fichier pdf
-  représentant le dis contrat. Les administrateurs peuvent voir l'intégralité des contrats ainsi que les modifier ou les supprimer.
+  représentant le dis contrat. Les administrateurs peuvent voir l'intégralité des contrats ainsi que les modifier ou les supprimer. Les administrateurs ne
+  peuvent pas signer des contrats à la place des utilisateurs.
   - Partie utilisateur : peuvent voir UNIQUEMENT les contrats qui leur sont attribués. Ils ont également la possibilité de visualiser le contrat
   et de le signer.
 
