@@ -51,7 +51,7 @@ class ContractController extends Controller
     public function form(Contract $contract = null): Response
     {
         $tmpData = [];
-        foreach (User::all('id', 'username') as $param){
+        foreach (User::where('administrator', '!=', true)->get() as $param){
             $tmpData[$param['id']] = $param['username'];
         }
         if ($contract == null) $contract = new Contract();

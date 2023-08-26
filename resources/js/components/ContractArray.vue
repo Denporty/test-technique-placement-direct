@@ -6,7 +6,7 @@
                 Titre
             </th>
             <th scope="col" class="px-6 py-3">
-                Utilisateur
+                Id de l'utilisateur
             </th>
             <th scope="col" class="px-6 py-3">
                 Signer

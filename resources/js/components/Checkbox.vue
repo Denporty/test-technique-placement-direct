@@ -4,7 +4,7 @@
             <span>{{ label }}</span>
         </label>
         <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-            <input v-model="proxyChecked" :value="value" type="checkbox" @click="$emit('click', $event.target.checked)" :name="name" :id="name" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+            <input :disabled="disabled" v-model="proxyChecked" :value="value" type="checkbox" @click="$emit('click', $event.target.checked)" :name="name" :id="name" :class="!disabled ? 'toggle-checkbox' : 'disabled-checkbox'" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
             <label :for="name" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
         </div>
     </div>
@@ -28,7 +28,8 @@ export default {
         'label': [String],
         'name': [String],
         'classname': [String],
-        'message': String
+        'message': String,
+        disabled: Boolean
     },
 
     computed: {
@@ -59,5 +60,9 @@ Checkbox
 }
 .toggle-checkbox:checked + .toggle-label {
     @apply bg-green-400 #{!important};
+}
+
+.disabled-checkbox:checked + .toggle-label {
+    @apply bg-gray-400 #{!important};
 }
 </style>

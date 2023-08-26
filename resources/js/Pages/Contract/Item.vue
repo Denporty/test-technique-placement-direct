@@ -9,7 +9,7 @@
             </object>
         </div>
         <div class="my-2">
-            <Checkbox label="Signer" name="is_sign" v-model:checked="form.is_sign" :value="form.is_sign" :message="form.errors.is_sign"/>
+            <Checkbox :disabled="$page.props.auth.user.administrator" label="Signer" name="is_sign" v-model:checked="form.is_sign" :value="form.is_sign" :message="form.errors.is_sign"/>
         </div>
         <Button @click="submitForm">
             Sauvegarder
