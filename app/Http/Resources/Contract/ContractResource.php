@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed content
  * @property mixed user_id
  * @property mixed is_sign
+ * @property mixed pdf
  * @property mixed created_at
  * @property mixed updated_at
  * @property mixed id
@@ -31,6 +32,7 @@ class ContractResource extends JsonResource
             'content' => $this->content,
             'user_id' => $this->user_id,
             'is_sign' => $this->is_sign,
+            'pdf' => $this->pdf,
             'created_at' => ($this->created_at != null) ? Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->isoFormat('dddd D MMMM HH[h]mm') : 'Aucune date',
             'updated_at' => ($this->updated_at != null) ? Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)->isoFormat('dddd D MMMM HH[h]mm') : 'Aucune date',
         ];

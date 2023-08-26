@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string content
  * @property integer user_id
  * @property integer is_sign
+ * @property string pdf
  * @property mixed id
  */
 class Contract extends Model
@@ -24,6 +25,7 @@ class Contract extends Model
         'content',
         'user_id',
         'is_sign',
+        'pdf',
     ];
 
     protected $casts = [

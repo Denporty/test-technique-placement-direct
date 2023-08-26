@@ -1,7 +1,7 @@
 <template>
     <AuthenticatedLayout>
         <Modal :show="showModal" type="danger">
-            <div class="font-bold text-xl leading-none p-4">Êtes-vous sûr de vouloir supprimer le contrat {{ props.contract?.title }} ?
+            <div class="font-bold text-xl leading-none p-4">Êtes-vous sûr de vouloir supprimer le contrat {{ props.contract?.data.title }} ?
             </div>
             <div class="flex my-2 justify-center p-8">
                 <Button @click="showModal = false"
@@ -23,6 +23,16 @@
             </div>
             <div class="my-2">
                 <Select label="Utilisateur lié" name="user_id" v-model="form.user_id" :message="form.errors.user_id" :options="props.users"/>
+            </div>
+            <div class="my-2">
+                <label for="pdf">PDF du contrat</label>
+                <input type="file" id="pdf" name="pdf" :message="form.errors.pdf" @change="handleFileUpload">
+            </div>
+            <div class="my-2">
+                <label>Fichier PDF du contrat</label>
+                <object :data="`/storage/pdfs/${props.contract.data.pdf}`" type="application/pdf" width="100%" height="600px">
+                    <p>Le navigateur ne peut pas afficher ce PDF. <a :href="`/storage/pdfs/${props.contract.data.pdf}`">Cliquez ici pour le télécharger.</a></p>
+                </object>
             </div>
             <div class="flex py-4">
                 <Button @click="submitForm" class="bg-blue-500 hover:bg-blue-700">
@@ -56,16 +66,23 @@ const form = useForm({
     content: props.contract?.data.content ?? null,
     user_id: props.contract?.data.user_id ?? null,
     is_sign: props.contract?.data.is_sign ?? null,
+    pdf: props.contract?.data.pdf ?? null,
 });
 
 let showModal = ref(false)
 
 function submitForm() {
+
     if(props.contract?.data.id) form.post(route('contracts.update', [props.contract?.data.id]))
     else form.post(route('contracts.store'))
 }
 
 function deleteContract(){
     form.delete(route('contracts.destroy', [props.contract?.data.id]))
+}
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    form.pdf = file;
 }
 </script>

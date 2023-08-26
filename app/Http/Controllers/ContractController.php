@@ -72,13 +72,25 @@ class ContractController extends Controller
         ]);
     }
 
+    public function pdfPrepare(ContractRequest $request) {
+        $pdfFile = $request->file('pdf');
+        $pdfFileName = $pdfFile->getClientOriginalName();
+        $pdfFile->storeAs('pdfs', $pdfFileName, 'public');
+        $validatedData['pdf'] = $pdfFileName;
+        return $validatedData;
+    }
+
     /**
      * @param ContractRequest $request
      * @return RedirectResponse
      */
     public function store(ContractRequest $request): RedirectResponse
     {
-        Contract::saveContract($request->validated());
+        $validatedData = $request->validated();
+        if ($request->hasFile('pdf')) {
+            $validatedData = $this->pdfPrepare($request);
+        }
+        Contract::saveContract($validatedData);
         return redirect()->route('contracts.index')->with('success', 'Le contrat a bien été créé');
     }
 
@@ -89,7 +101,11 @@ class ContractController extends Controller
      */
     public function update(ContractRequest $request, Contract $contract = null): RedirectResponse
     {
-        Contract::saveContract($request->validated(), $contract);
+        $validatedData = $request->validated();
+        if ($request->hasFile('pdf')) {
+            $validatedData = $this->pdfPrepare($request);
+        }
+        Contract::saveContract($validatedData, $contract);
         return Redirect::route('contracts.index')->with('success', 'Le contract a bien été mis à jour');
     }
 
