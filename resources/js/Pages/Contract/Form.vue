@@ -1,4 +1,5 @@
 <template>
+    <Head :title="props.contract?.data.title ? 'Formulaire de mise à jour du contrat '+props.contract?.data.title : 'Formulaire de création de contrat'" />
     <AuthenticatedLayout>
         <Modal :show="showModal" type="danger">
             <div class="font-bold text-xl leading-none p-4">Êtes-vous sûr de vouloir supprimer le contrat {{ props.contract?.data.title }} ?
@@ -19,7 +20,7 @@
                 <Input label="Titre du contrat" name="title" v-model="form.title" :message="form.errors.title"/>
             </div>
             <div class="my-2">
-                <TextArea label="Contenu du contrat" name="content" v-model="form.content" :message="form.errors.content"></TextArea>
+                <TextArea label="Description du contrat" name="content" v-model="form.content" :message="form.errors.content"></TextArea>
             </div>
             <div class="my-2">
                 <Select label="Utilisateur lié" name="user_id" v-model="form.user_id" :message="form.errors.user_id" :options="props.users"/>
@@ -31,7 +32,6 @@
             <div class="my-2">
                 <label>Fichier PDF du contrat</label>
                 <object :data="`/storage/pdfs/${props.contract.data.pdf}`" type="application/pdf" width="100%" height="600px">
-                    <p>Le navigateur ne peut pas afficher ce PDF. <a :href="`/storage/pdfs/${props.contract.data.pdf}`">Cliquez ici pour le télécharger.</a></p>
                 </object>
             </div>
             <div class="flex py-4">
@@ -54,7 +54,7 @@ import Select from "@/components/Select.vue";
 import TextArea from "@/components/TextArea.vue";
 import Modal from "@/components/Modal.vue";
 import {defineProps, ref} from "vue";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, Head} from "@inertiajs/vue3";
 
 const props = defineProps({
     contract: Object,

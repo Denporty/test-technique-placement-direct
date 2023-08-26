@@ -1,27 +1,16 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p align="center"><a href="https://www.placement-direct.fr/" target="_blank"><img src="https://www.comparateurbanque.com/files/2019/09/logoplacementdirect.png" width="400" alt="Laravel Logo"></a></p>
 
 ## A propos du projet
 
-Le but de ce test est de réaliser un espace client où les utilisateurs vont pouvoir consulter leurs contrats
-souscrits ainsi que leur profil.
-- L’accès à l’espace client sera protégé via une authentification et un token JWT.
-- La page d’accueil présentera une liste des différents contrats souscrits.
-- Sur la page d’accueil, le client pourra accéder à son profil et voir les informations suivantes :
-  - Son identifiant ;
-  - Son prénom ;
-  - Son nom ;
-  - Son email ;
-  - Son numéro de téléphone ;
-- Depuis son profil, l’utilisateur doit pouvoir modifier son email et son numéro de téléphone.
-- Facultatif : l’utilisateur pourra aussi modifier son mot de passe (le mot de passe sera crypté en base de
-  données).
+Le projet se compose de 2 features :
+
+- Création d'un compte via le starter kit Laravel Breeze dans sa version Inertia modifié pour ajouter un numéro de téléphone, 
+un grade via un boolean, un prénom, nom et pseudo. 
+- Mise en place d'une feature pour gérer des contrats. La feature est découpée en 2 parties :
+  - Partie administrateur : peuvent créer un contrat qui se compose d'un titre, une description, un utilisateur lié au contrat et un fichier pdf
+  représentant le dis contrat. Les administrateurs peuvent voir l'intégralité des contrats ainsi que les modifier ou les supprimer.
+  - Partie utilisateur : peuvent voir UNIQUEMENT les contrats qui leur sont attribués. Ils ont également la possibilité de visualiser le contrat
+  et de le signer.
 
 ## Liste des technos 
 
@@ -35,7 +24,13 @@ Back :
 - Laravel
 - Inertia
 
-## Déploiement 
+DB :
+- pgSQL
+
+## Initialiser le projet 
+
+Dans un premier temps il vous faut configurer votre .env avec vos données de DB. Pour ce faire je vous invite à dupliquer le 
+fichier .env.example qui regroupe toutes les variables d'environnement dont vous aurez besoin.
 
 Pour setup le projet vous pouvez utiliser directement le script setupScript.sh
 ```bash
@@ -60,7 +55,7 @@ then
     # do dangerous stuff
     php artisan migrate:fresh
     php artisan migrate --force
-    php artisan db:seed --class=UserSeeder
+    # php artisan db:seed --class=UserSeeder
 fi
 if [[ $REPLY =~ ^[Nn]$ ]]
 then
@@ -78,13 +73,33 @@ npm install
 echo "Script pull finished"
 ```
 
-Vous pouvez donc également le faire directement avec les commandes ci-dessus.
+Si vous souhaitez initialiser vous même le projet voici les étapes à suivre : 
 
-Pour démarrer le projet il vous faut faire : 
+Installation des librairies php
+```
+composer install
+```
+Génération de la clé d'application 
+```
+php artisan key:generate
+```
+Migrations (j'ai décidé de simplifier la mise en place d'un compte admin en incorporant le compte directement à la migration mais un seeder est également présent dans database/seeders/UserSeeder.php)
+```
+php artisan migrate:fresh
+```
+Installation des librairies node
+```
+npm install
+```
+Il vous suffit alors de faire les commandes pour démarrer le projet.
+
+## Démarrer le projet
+
+Pour démarrer le projet il vous faut faire :
 ```bash
 php artisan serve
 ```
-Ainsi que 
+Ainsi que
 ```
 npm run dev
 ```

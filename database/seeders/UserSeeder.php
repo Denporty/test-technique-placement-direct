@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'username' => 'placement-direct',
                 'firstname' => 'PlacementDirect',
                 'lastname' => 'Administateur',
-                'password' => Hash::make(config('Admin2022')),
+                'password' => Hash::make('Admin2022'),
                 'email' => 'contact@placementdirect.fr',
                 'phone' => '0769178981',
                 'administrator' => true,

@@ -9,7 +9,7 @@
                 Utilisateur
             </th>
             <th scope="col" class="px-6 py-3">
-                Signé
+                Signer
             </th>
             <th scope="col" class="px-6 py-3">
                 Action

@@ -1,4 +1,5 @@
 <template>
+    <Head :title="'Contrat '+props.contract.data.title" />
     <AuthenticatedLayout>
         <div class="flex flex-col">
             <h1 class="font-bold text-2xl my-4">{{ props.contract.data.title }}</h1>
@@ -21,7 +22,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Checkbox from "@/components/Checkbox.vue";
 import Button from "@/components/Button.vue";
-import {useForm} from "@inertiajs/vue3";
+import {useForm, Head} from "@inertiajs/vue3";
 import {defineProps} from "vue";
 
 const props = defineProps({

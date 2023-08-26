@@ -32,7 +32,7 @@ class ContractController extends Controller
      */
     public function create(): mixed
     {
-        return $this->form( null);
+        return $this->form( );
     }
 
     /**
@@ -62,7 +62,7 @@ class ContractController extends Controller
     }
 
     /**
-     * @param Contract|null $contract
+     * @param Contract $contract
      * @return Response
      */
     public function show(Contract $contract): Response
@@ -73,6 +73,7 @@ class ContractController extends Controller
     }
 
     public function pdfPrepare(ContractRequest $request) {
+        $validatedData = $request->validated();
         $pdfFile = $request->file('pdf');
         $pdfFileName = $pdfFile->getClientOriginalName();
         $pdfFile->storeAs('pdfs', $pdfFileName, 'public');

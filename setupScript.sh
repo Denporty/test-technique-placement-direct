@@ -14,7 +14,7 @@ then
     # do dangerous stuff
     php artisan migrate:fresh
     php artisan migrate --force
-    php artisan db:seed --class=UserSeeder
+    # php artisan db:seed --class=UserSeeder
 fi
 if [[ $REPLY =~ ^[Nn]$ ]]
 then
