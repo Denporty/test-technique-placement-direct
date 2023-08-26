@@ -1,8 +1,8 @@
 <template>
     <AuthenticatedLayout>
         <div class="flex flex-col">
-            <h1 class="font-bold text-2xl my-4">{{ props.contract.title }}</h1>
-            <p>{{ props.contract.content }}</p>
+            <h1 class="font-bold text-2xl my-4">{{ props.contract.data.title }}</h1>
+            <p>{{ props.contract.data.content }}</p>
         </div>
         <div class="my-2">
             <Checkbox label="Signer" name="is_sign" v-model:checked="form.is_sign" :value="form.is_sign" :message="form.errors.is_sign"/>
