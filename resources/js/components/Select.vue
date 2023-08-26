@@ -1,6 +1,6 @@
 <template>
     <label class="block font-medium text-sm text-gray-700 my-2">
-        <span>{{ name }}</span>
+        <span>{{ label }}</span>
     </label>
     <select class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block w-full"
             :class="classname"

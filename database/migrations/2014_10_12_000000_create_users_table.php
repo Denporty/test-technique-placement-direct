@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -24,6 +26,16 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            'username' => 'placement-direct',
+            'firstname' => 'PlacementDirect',
+            'lastname' => 'Administateur',
+            'password' => Hash::make('Admin2022'),
+            'email' => 'contact@placementdirect.fr',
+            'phone' => '0769178981',
+            'administrator' => true,
+        ]);
     }
 
     /**

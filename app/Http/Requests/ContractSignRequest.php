@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @property mixed article
  */
-class ContractRequest extends FormRequest
+class ContractSignRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,7 @@ class ContractRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:75',
-            'content' => 'required|string',
-            'user_id' => 'required|integer',
-            'is_sign' => 'nullable|boolean',
+            'is_sign' => 'required|boolean',
         ];
     }
 

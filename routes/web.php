@@ -18,7 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -34,8 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('contracts', ContractController::class)->except(['show', 'update']);
+    Route::resource('contracts', ContractController::class)->except(['show', 'update', 'index'])->middleware('admin');
+    Route::get('contracts', [ContractController::class, 'index'])->name('contracts.index');
+    Route::get('contracts/{contract}/show', [ContractController::class, 'show'])->name('contracts.show');
     Route::post('contracts/{contract}/update', [ContractController::class, 'update'])->name('contracts.update');
+    Route::post('contracts/{contract}/sign', [ContractController::class, 'sign'])->name('contracts.sign');
 });
 
 require __DIR__.'/auth.php';

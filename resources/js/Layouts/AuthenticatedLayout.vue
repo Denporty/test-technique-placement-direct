@@ -32,6 +32,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <NavLink :href="route('contracts.index')" :active="route().current('contracts.index')">
+                                    {{ $page.props.auth.user.administrator ? 'Liste des contrats' : 'Mes contrats' }}
+                                </NavLink>
                             </div>
                         </div>
 
@@ -144,7 +147,7 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <slot />
             </main>
         </div>

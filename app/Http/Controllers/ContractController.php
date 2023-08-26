@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContractRequest;
+use App\Http\Requests\ContractSignRequest;
 use App\Http\Resources\Contract\ContractResource;
 use App\Models\Contract;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -18,8 +20,10 @@ class ContractController extends Controller
      */
     public function index(): Response
     {
+        $user = Auth::user();
+        $contracts = $user->administrator ? Contract::all() : Contract::where('user_id', 'like', $user->id)->get();
         return Inertia::render('Contract/Index', [
-            'contracts' => Contract::all(),
+            'contracts' => $contracts,
         ]);
     }
 
@@ -58,6 +62,17 @@ class ContractController extends Controller
     }
 
     /**
+     * @param Contract|null $contract
+     * @return Response
+     */
+    public function show(Contract $contract): Response
+    {
+        return Inertia::render('Contract/Item', [
+            'contract' => new ContractResource($contract),
+        ]);
+    }
+
+    /**
      * @param ContractRequest $request
      * @return RedirectResponse
      */
@@ -76,6 +91,17 @@ class ContractController extends Controller
     {
         Contract::saveContract($request->validated(), $contract);
         return Redirect::route('contracts.index')->with('success', 'Le contract a bien été mis à jour');
+    }
+
+    /**
+     * @param ContractSignRequest $request
+     * @param Contract|null $contract
+     * @return RedirectResponse
+     */
+    public function sign(ContractSignRequest $request, Contract $contract = null): RedirectResponse
+    {
+        Contract::saveContract($request->validated(), $contract);
+        return Redirect::route('contracts.index')->with('success', 'Le contract a bien été signé');
     }
 
     /**
